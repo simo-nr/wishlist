@@ -2,6 +2,7 @@ from flask import Flask, render_template, url_for, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from flask_bcrypt import Bcrypt
+from flask import jsonify
 from datetime import datetime
 
 from config import Config
@@ -94,11 +95,18 @@ def view(id):
     viewing_user = load_user(id)
     if current_user == viewing_user:
         print("viewing user was equal")
-        print(viewing_user)
-        print(current_user)
         return redirect('/')
     items = WishlistItem.query.filter_by(user=viewing_user).order_by(WishlistItem.date_created).all()
     return render_template('view.html', items = items)
+
+
+@app.route('/checkoff/<int:item_id>', methods=['POST'])
+@login_required
+def check_off_item(item_id):
+    item = WishlistItem.query.get_or_404(item_id)
+    item.checked_off = True
+    db.session.commit()
+    return jsonify({'message': 'Item checked off successfully'})
 
 
 # Function to create the app context
