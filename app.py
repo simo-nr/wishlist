@@ -3,7 +3,6 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from flask_bcrypt import Bcrypt
 from flask import jsonify
-from flask_wtf.csrf import CSRFProtect, CSRFError
 from datetime import datetime
 
 from config import Config
@@ -11,7 +10,6 @@ from models import db, User, WishlistItem
 
 
 app = Flask(__name__)
-csrf = CSRFProtect(app)
 app.config.from_object(Config)
 
 db.init_app(app)
@@ -105,14 +103,10 @@ def view(id):
 @app.route('/checkoff/<int:item_id>', methods=['POST'])
 @login_required
 def check_off_item(item_id):
-    try:
-        item = WishlistItem.query.get_or_404(item_id)
-        item.checked_off = True
-        db.session.commit()
-        return jsonify({'message': 'Item checked off successfully'})
-    except CSRFError as e:
-        return jsonify({'error': 'CSRF token validation failed'}), 400  # Return a 400 Bad Request status for CSRF errors
-
+    item = WishlistItem.query.get_or_404(item_id)
+    item.checked_off = True
+    db.session.commit()
+    return jsonify({'message': 'Item checked off successfully'})
 
 
 # Function to create the app context
