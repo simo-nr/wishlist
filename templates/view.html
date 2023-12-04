@@ -17,7 +17,9 @@
                 <td>{{ item.url }}</td>
                 <td>{{ item.date_created.date() }}</td>
                 <td>
-                    <button type="button" onclick="checkOffItem('{{ item.id }}')">Check off</button>
+                    <button type="button" onclick="checkOffItem('{{ item.id }}', this)" {% if item.checked_off %}disabled{% endif %}>
+                        Check off
+                    </button>
                 </td>
             </tr>
         {% endfor %}
@@ -27,8 +29,7 @@
 </div>
 
 <script>
-    function checkOffItem(itemId) {
-        // AJAX request
+    function checkOffItem(itemId, button) {
         fetch(`/checkoff/${itemId}`, {
             method: 'POST',
             headers: {
@@ -41,6 +42,7 @@
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
+            button.disabled = true;
             return response.json();
         })
         .then(data => {
@@ -51,6 +53,7 @@
             console.error('There was a problem with the fetch operation:', error);
         });
     }
+
 </script>
 
 {% endblock %}
