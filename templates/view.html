@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="content">
+    <h1 style="text-align: center">List of user something</h1>
+    {% if items|length < 1 %}
+    <h4 style="text-align: center">User hasnt added any items yet</h4>
+    {% else %}
+    <table>
+        <tr>
+            <th>Item</th>
+            <th>Added</th>
+            <th>Check off</th>
+        </tr>
+        {% for item in items %}
+            <tr>
+                <td>{{ item.url }}</td>
+                <td>{{ item.date_created.date() }}</td>
+                <td>
+                    <button type="button">Check off</button>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+
+</div>
+{% endblock %}

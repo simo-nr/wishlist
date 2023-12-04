@@ -88,6 +88,18 @@ def index():
         return render_template('index.html', items = items)
     
 
+@app.route('/view/<int:id>', methods=['POST', 'GET'])
+@login_required
+def view(id):
+    viewing_user = load_user(id)
+    if current_user == viewing_user:
+        print("viewing user was equal")
+        print(viewing_user)
+        print(current_user)
+        return redirect('/')
+    items = WishlistItem.query.filter_by(user=viewing_user).order_by(WishlistItem.date_created).all()
+    return render_template('view.html', items = items)
+
 
 # Function to create the app context
 def create_app():
