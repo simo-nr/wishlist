@@ -1,0 +1,43 @@
+run commands in terminal (directory of app.py)
+
+export FLASK_APP=your_script_name.py
+export FLASK_ENV=development
+flask initdb
+
+or for this project:
+
+export FLASK_APP=app.py
+export FLASK_ENV=development
+flask initdb
+
+CODE SHOULD LOOK LIKE THIS:
+
+
+
+
+from flask import Flask, render_template, url_for, request, redirect
+from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
+
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///wishlist.db'
+db = SQLAlchemy(app)
+
+class WishlistItem(db.Model):
+    # ... (your model definition remains the same)
+
+# Function to create the app context
+def create_app():
+    return app
+
+# Command to create the database tables
+@app.cli.command("initdb")
+def initdb_command():
+    with app.app_context():
+        db.create_all()
+    print("Initialized the database.")
+
+# ... (rest of your code remains the same)
+
+if __name__ == "__main__":
+    app.run(debug=True)
