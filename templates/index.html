@@ -28,6 +28,7 @@
 
     <div class="form">
         <form action="/" method="POST">
+            {{ form.csrf_token }}
             <input type="text" name="url" id="url">
             <input type="submit" value="Add Item">
         </form>
