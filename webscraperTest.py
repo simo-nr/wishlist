@@ -61,16 +61,16 @@ def find_word(url, target_word):
     
 
 def writeToFile(text):
-    try:
-        os.remove("junk/test.html")
-    except:
-        print("no file found")
     f = open("junk/test.html", "a")
     f.write(text)
     f.close()
 
     
 if __name__ == "__main__":
+    try:
+        os.remove("junk/test.html")
+    except:
+        print("no file found")
     url = 'https://www.amazon.com.be/-/en/dp/B0B928CDMT/?coliid=I2FV1G7XZ2ICR3&colid=150D9KTIA0UMT&psc=1&ref_=list_c_wl_lv_ov_lig_dp_it'
     text = find_word(url, target_word="price")
     for line in text:
