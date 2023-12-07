@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="content">
+    <h1>Add an item</h1>
+    <div>
+        Add a new item to your wishlist. Paste the url of the article or enter the name of the item below.
+    </div>
+    <div style="align-items: center; background-color: green;">
+        <form action="/new" method="POST" style="align-items: center;">
+            <input type="text" class="urlField" name="url" id="url" placeholder="URL or name of the item">
+            <input type="submit" class="addItemButton" value="Continue">
+        </form>
+    </div>
+</div>
+    
+{% endblock %}

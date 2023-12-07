@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    form {
+      max-width: 400px; /* Optional: Add a maximum width to the form */
+      margin: 20px auto; /* Optional: Center the form on the page */
+    }
+
+    input[type="text"] {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 10px;
+      margin-bottom: 10px;
+      background-color: #333; /* Dark background color */
+      border: 2px solid #ccc; /* Light grey border */
+      color: #fff; /* Text color */
+      font-size: 16px;
+    }
+
+    input[type="text"]::placeholder {
+      color: #999; /* Placeholder text color */
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50; /* Green button color */
+      color: #fff; /* Button text color */
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <form>
+    <input type="text" class="urlField" placeholder="Enter URL" value="enter url">
+    <button type="submit">Submit</button>
+  </form>
+
+</body>
+</html>

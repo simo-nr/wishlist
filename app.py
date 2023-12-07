@@ -86,7 +86,7 @@ def index():
     else:
         # items = WishlistItem.query.order_by(WishlistItem.date_created).all()
         items = WishlistItem.query.filter_by(user=current_user).order_by(WishlistItem.date_created).all()
-        return render_template('index.html', items = items)
+        return render_template('index.html', user=current_user.username, items=items)
     
 
 @app.route('/view/<int:id>', methods=['POST', 'GET'])
@@ -98,6 +98,11 @@ def view(id):
         return redirect('/')
     items = WishlistItem.query.filter_by(user=viewing_user).order_by(WishlistItem.date_created).all()
     return render_template('view.html', items = items)
+
+@app.route('/new', methods=['POST', 'GET'])
+@login_required
+def new():
+    return render_template('new.html')
 
 
 @app.route('/checkoff/<int:item_id>', methods=['POST'])

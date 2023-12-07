@@ -3,6 +3,7 @@
 {% block body %}
 <div class="content">
     <h1 style="text-align: center">Item Master</h1>
+    <h1 style="text-align: center;">{{ user }}'s wishlist</h1>
     {% if items|length < 1 %}
     <h4 style="text-align: center">There are no items. Create one below!</h4>
     {% else %}
@@ -25,6 +26,15 @@
         {% endfor %}
     </table>
     {% endif %}
+
+    <button onclick="newItemPage()">Add an item</button>
+
+   <script>
+     function newItemPage() {
+       var targetPageUrl = '/new';
+       window.location.href = targetPageUrl;
+    }
+   </script>
 
     <div class="form">
         <form action="/" method="POST">

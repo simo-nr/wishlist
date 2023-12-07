@@ -1,0 +1,31 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.urlField {
+    margin: 20px;
+    margin-bottom: 10px;
+    width: 80%;
+    box-sizing: border-box;
+    padding: 10px;
+    background-color: #333; /* Dark background color */
+    border: 2px solid #a4a3a3; /* Light grey border */
+    color: #fff; /* Text color */
+    font-size: 16px;
+  }
+
+  .urlField::placeholder {
+    color: #a4a3a3; /* Placeholder text color */
+  }
+
+  .addItemButton {
+    width: 30%;
+    padding: 10px;
+    margin: 20px;
+    margin-top: 10px;
+    background-color: #4CAF50; /* Green button color */
+    color: #fff; /* Button text color */
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+  }
