@@ -14,11 +14,11 @@ body {
     font-size: 16px;
   }
 
-  .urlField::placeholder {
+.urlField::placeholder {
     color: #a4a3a3; /* Placeholder text color */
-  }
+}
 
-  .addItemButton {
+.addItemButton {
     width: 30%;
     padding: 10px;
     margin: 20px;
@@ -28,4 +28,23 @@ body {
     border: none;
     cursor: pointer;
     font-size: 16px;
-  }
+}
+
+.bigButton {
+    width: 200px;
+    padding: 10px;
+    margin: 20px;
+    margin-top: 10px;
+    color: #fff; /* Button text color */
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+h1 {
+    margin: 20px;
+}
+
+p {
+    margin-left: 20px;
+}
