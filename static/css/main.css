@@ -2,6 +2,12 @@ body {
     font-family: Arial, sans-serif;
 }
 
+.itemHolder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .urlField {
     margin: 20px;
     margin-bottom: 10px;
@@ -35,6 +41,7 @@ body {
     padding: 10px;
     margin: 20px;
     margin-top: 10px;
+    background-color: #4CAF50; /* Green button color */
     color: #fff; /* Button text color */
     border: none;
     cursor: pointer;

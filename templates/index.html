@@ -2,7 +2,6 @@
 
 {% block body %}
 <div class="content">
-    <h1 style="text-align: center">Item Master</h1>
     <h1 style="text-align: center;">{{ user }}'s wishlist</h1>
     {% if items|length < 1 %}
     <h4 style="text-align: center">There are no items. Create one below!</h4>
@@ -10,24 +9,26 @@
 
     <button class="bigButton" onclick="newItemPage()" style="background-color: rgb(79, 204, 79);">Add an item</button>
 
-    <table>
-        <tr>
-            <th>Item</th>
-            <th>Added</th>
-            <th>Actions</th>
-        </tr>
-        {% for item in items %}
+    <div class="itemHolder">
+        <table>
             <tr>
-                <td>{{ item.url }}</td>
-                <td>{{ item.date_created.date() }}</td>
-                <td>
-                    <a href="/delete/{{item.id}}">Delete</a>
-                    <br>
-                    <a href="/update/{{item.id}}">Update</a>
-                </td>
+                <th>Item</th>
+                <th>Added</th>
+                <th>Actions</th>
             </tr>
-        {% endfor %}
-    </table>
+            {% for item in items %}
+                <tr>
+                    <td>{{ item.url }}</td>
+                    <td>{{ item.date_created.date() }}</td>
+                    <td>
+                        <a href="/delete/{{item.id}}">Delete</a>
+                        <br>
+                        <a href="/update/{{item.id}}">Update</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
     {% endif %}
 
 
@@ -38,11 +39,5 @@
     }
    </script>
 
-    <div class="form">
-        <form action="/" method="POST">
-            <input type="text" name="url" id="url">
-            <input type="submit" value="Add Item">
-        </form>
-    </div>
 </div>
 {% endblock %}

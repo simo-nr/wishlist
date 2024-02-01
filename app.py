@@ -22,7 +22,7 @@ login_manager.login_view = 'login'
 
 @login_manager.user_loader
 def load_user(user_id):
-    return User.query.get(int(user_id))
+    return db.session.get(User, int(user_id))
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -74,19 +74,8 @@ def register():
 @app.route('/', methods=['POST', 'GET'])
 @login_required
 def index():
-    if request.method == 'POST':
-        item_url = request.form['url']
-        new_item = WishlistItem(url=item_url, user=current_user)
-        try:
-            db.session.add(new_item)
-            db.session.commit()
-            return redirect('/')
-        except:
-            return "There was an error adding the item"
-    else:
-        # items = WishlistItem.query.order_by(WishlistItem.date_created).all()
-        items = WishlistItem.query.filter_by(user=current_user).order_by(WishlistItem.date_created).all()
-        return render_template('index.html', user=current_user.username, items=items)
+    items = WishlistItem.query.filter_by(user=current_user).order_by(WishlistItem.date_created).all()
+    return render_template('index.html', user=current_user.username, items=items)
     
 
 @app.route('/view/<int:id>', methods=['POST', 'GET'])
@@ -102,6 +91,15 @@ def view(id):
 @app.route('/new', methods=['POST', 'GET'])
 @login_required
 def new():
+    if request.method == 'POST':
+        item_url = request.form['url']
+        new_item = WishlistItem(url=item_url, user=current_user)
+        try:
+            db.session.add(new_item)
+            db.session.commit()
+            return redirect('/')
+        except:
+            return "There was an error adding the item"
     return render_template('new.html')
 
 
