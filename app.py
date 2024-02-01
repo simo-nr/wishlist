@@ -10,7 +10,6 @@ from models import db, User, WishlistItem
 
 
 app = Flask(__name__)
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://your_username:your_password@Simon1122.mysql.pythonanywhere-services.com/your_database_name'
 app.config.from_object(Config)
 
 db.init_app(app)
