@@ -5,9 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
     {% block head %}{% endblock %}
 </head>
 <body>
-    {% block body %}{% endblock %}
+    <div id="menu">
+        <a href="/" onclick="closeMenu()">Home</a>
+        <a href="#" onclick="closeMenu()">Friends</a>
+        <a href="#" onclick="closeMenu()">Services</a>
+        <a href="#" onclick="closeMenu()">Contact</a>
+    </div>
+    
+    <div id="content">
+        <div id="menu-icon" onclick="toggleMenu()">&#9776;</div>
+
+        {% block body %}{% endblock %}
+    </div>
+    
 </body>
 </html>
