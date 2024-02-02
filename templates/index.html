@@ -21,6 +21,8 @@
                     <td>{{ item.url }}</td>
                     <td>{{ item.date_created.date() }}</td>
                     <td>
+                        <a href="/view_item/{{item.id}}">View</a>
+                        <br>
                         <a href="/delete/{{item.id}}">Delete</a>
                         <br>
                         <a href="/update/{{item.id}}">Update</a>

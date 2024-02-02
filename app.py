@@ -78,15 +78,31 @@ def index():
     return render_template('index.html', user=current_user.username, items=items)
     
 
-@app.route('/view/<int:id>', methods=['POST', 'GET'])
+@app.route('/view_user/<int:id>', methods=['POST', 'GET'])
 @login_required
-def view(id):
+def view_user(id):
     viewing_user = load_user(id)
     if current_user == viewing_user:
         print("viewing user was equal")
         return redirect('/')
     items = WishlistItem.query.filter_by(user=viewing_user).order_by(WishlistItem.date_created).all()
-    return render_template('view.html', items = items)
+    return render_template('view_user.html', items=items)
+
+@app.route('/view_item/<int:id>', methods=['POST', 'GET'])
+@login_required
+def view_item(id):
+    viewing_item = WishlistItem.query.get_or_404(id)
+    return render_template('view_item.html', item=viewing_item)
+
+@app.route('/edit_item/<int:id>', methods=['POST', 'GET'])
+@login_required
+def edit_item(id):
+    edit_item = WishlistItem.query.get_or_404(id)
+    owner_of_item = load_user(edit_item.user_id)
+    if current_user != owner_of_item:
+        print("user does not own item")
+        return redirect('/')
+    return render_template('edit_item.html', item=edit_item)
 
 @app.route('/new', methods=['POST', 'GET'])
 @login_required

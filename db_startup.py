@@ -15,11 +15,3 @@ my_cursor = mydb.cursor()
 my_cursor.execute("SHOW DATABASES")
 for db in my_cursor:
     print(db)
-
-# @app.cli.command()
-# def initdb():
-#     with app.app_context():
-#         db.create_all()
-
-# if __name__ == "__main__":
-#     app.run()
