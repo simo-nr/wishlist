@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="content">
+    <h1 style="text-align: center">View of item</h1>
+
+    <h4 style="text-align: center">something about the item</h4>
+
+
+    <form action="/edit_item/{{ item.id }}" method="post">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" value="{{ item.name }}"><br>
+        
+        <label for="image_link">Image Link:</label><br>
+        <!-- add button to regenerate the available images -->
+        <!-- add list of images -->
+        <input type="text" id="image_link" name="image_link" value="{{ item.image_link }}"><br>
+        
+        <label for="url">URL:</label><br>
+        <input type="text" id="url" name="url" value="{{ item.url }}"><br>
+        
+        <label for="checked_off">Checked Off:</label><br>
+        <input type="checkbox" id="checked_off" name="checked_off" {% if item.checked_off %}checked{% endif %}><br>
+        
+        <label for="notes">Notes:</label><br>
+        <textarea id="notes" name="notes">{{ item.notes }}</textarea><br>
+        
+        <input type="submit" value="Submit">
+    </form>
+
+</div>
+
+<script>
+
+
+</script>
+
+{% endblock %}

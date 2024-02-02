@@ -88,34 +88,50 @@ def view_user(id):
     items = WishlistItem.query.filter_by(user=viewing_user).order_by(WishlistItem.date_created).all()
     return render_template('view_user.html', items=items)
 
+
 @app.route('/view_item/<int:id>', methods=['POST', 'GET'])
 @login_required
 def view_item(id):
     viewing_item = WishlistItem.query.get_or_404(id)
     return render_template('view_item.html', item=viewing_item)
 
+
 @app.route('/edit_item/<int:id>', methods=['POST', 'GET'])
 @login_required
 def edit_item(id):
     edit_item = WishlistItem.query.get_or_404(id)
     owner_of_item = load_user(edit_item.user_id)
+
     if current_user != owner_of_item:
         print("user does not own item")
         return redirect('/')
+    
+    if request.method == 'POST':
+        edit_item.name = request.form['name']
+        edit_item.image_link = request.form['image_link']
+        edit_item.url = request.form['url']
+        edit_item.notes = request.form['notes']
+
+        try:
+            db.session.commit()
+            print("item is changed")
+            return render_template('view_item.html', item=edit_item)
+        except:
+            db.session.rollback()  # Rollback changes if an error occurs during commit
+            return "There was an error updating the item"
+        
     return render_template('edit_item.html', item=edit_item)
+
 
 @app.route('/new', methods=['POST', 'GET'])
 @login_required
 def new():
     if request.method == 'POST':
         item_url = request.form['url']
+        # add web scraper here
+        # for now just redirect to edit page with only the url in the item
         new_item = WishlistItem(url=item_url, user=current_user)
-        try:
-            db.session.add(new_item)
-            db.session.commit()
-            return redirect('/')
-        except:
-            return "There was an error adding the item"
+        return render_template('edit_item.html', item=new_item)
     return render_template('new.html')
 
 
