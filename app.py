@@ -1,5 +1,6 @@
 from flask import Flask, render_template, url_for, request, redirect, session, jsonify, json
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import desc
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from flask_bcrypt import Bcrypt
 from flask import jsonify
@@ -75,7 +76,7 @@ def register():
 @app.route('/', methods=['POST', 'GET'])
 @login_required
 def index():
-    items = WishlistItem.query.filter_by(user=current_user).order_by(WishlistItem.date_created).all()
+    items = WishlistItem.query.filter_by(user=current_user).order_by(desc(WishlistItem.date_created)).all()
     return render_template('index.html', user=current_user.username, items=items)
     
 
@@ -86,7 +87,7 @@ def view_user(id):
     if current_user == viewing_user:
         print("viewing user was equal")
         return redirect('/')
-    items = WishlistItem.query.filter_by(user=viewing_user).order_by(WishlistItem.date_created).all()
+    items = WishlistItem.query.filter_by(user=viewing_user).order_by(desc(WishlistItem.date_created)).all()
     return render_template('view_user.html', items=items)
 
 
