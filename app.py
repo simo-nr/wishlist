@@ -1,9 +1,10 @@
-from flask import Flask, render_template, url_for, request, redirect
+from flask import Flask, render_template, url_for, request, redirect, session, jsonify, json
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from flask_bcrypt import Bcrypt
 from flask import jsonify
 from datetime import datetime
+import uuid
 
 from config import Config
 from models import db, User, WishlistItem
@@ -117,22 +118,68 @@ def edit_item(id):
             print("item is changed")
             return render_template('view_item.html', item=edit_item)
         except:
-            db.session.rollback()  # Rollback changes if an error occurs during commit
+            db.session.rollback()
             return "There was an error updating the item"
         
     return render_template('edit_item.html', item=edit_item)
 
 
-@app.route('/new', methods=['POST', 'GET'])
+
+@app.route('/new_url', methods=['POST', 'GET'])
 @login_required
-def new():
+def new_url():
     if request.method == 'POST':
         item_url = request.form['url']
+        
         # add web scraper here
+        # to demonstrate webscraper, add notes
+        notes = f'some things in the note to act like webscraper stuff {datetime.utcnow}'
         # for now just redirect to edit page with only the url in the item
-        new_item = WishlistItem(url=item_url, user=current_user)
-        return render_template('edit_item.html', item=new_item)
-    return render_template('new.html')
+
+        temp_new_item = WishlistItem(user_id=current_user.id, url=item_url, notes=notes)
+        
+        try:
+            db.session.add(temp_new_item)
+            db.session.commit()
+            print("item added succesfully")
+        except:
+            db.session.rollback()
+            print("item not added")
+            return "there was a problem adding the item"
+
+        return redirect(url_for('add_item', id=temp_new_item.id))
+    
+    return render_template('new_url.html')
+
+
+
+@app.route('/add_item/<int:id>', methods=['POST', 'GET'])
+@login_required
+def add_item(id):
+    new_item = WishlistItem.query.get(id)
+
+    if new_item is None:
+        print("item not found in the database")
+        return "No item found in the database"
+
+    if request.method == 'POST':
+        new_item.name = request.form['name']
+        new_item.image_link = request.form['image_link']
+        new_item.url = request.form['url']
+        new_item.notes = request.form['notes']
+
+        try:
+            db.session.add(new_item)
+            db.session.commit()
+            print("Item is added")
+            return render_template('view_item.html', item=new_item)
+        except:
+            db.session.rollback()  # Rollback changes if an error occurs during commit
+            return "There was an error updating the item"
+
+    return render_template('add_item.html', item=new_item)
+
+
 
 
 @app.route('/checkoff/<int:item_id>', methods=['POST'])

@@ -25,5 +25,17 @@ class WishlistItem(db.Model):
     notes = db.Column(db.String(400))
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
 
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'user_id': self.user_id,
+            'name': self.name,
+            'image_link': self.image_link,
+            'url': self.url,
+            'checked_off': self.checked_off,
+            'notes': self.notes
+            # 'date_created': self.date_created.strftime('%Y-%m-%d %H:%M:%S')
+        }
+
     def __repr__(self):
         return f'<Item {self.id} - User {self.user_id}>'
