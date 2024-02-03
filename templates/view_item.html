@@ -19,11 +19,11 @@
                 <p>Added: {{ item.date_created }}</p>
 
                 <div class="container">
-                    {% if item.user_id == userId %}
+                    {% if item.user_id != userId %}
                     <button class="bigButton" onclick="editItem()" data-item-id="{{ item.id }}" style="background-color: rgb(79, 204, 79);">Edit this item</button>
                     {% else %}
                     <button class="bigButton" onclick="goToSite()" data-item-id="6" style="background-color: rgb(56,131,193);">Go to link</button>
-                    <button class="bigButton" onclick="checkoff()" data-item-id="6" style="background-color: rgb(79, 204, 79);">Check this off</button>
+                    <button class="bigButton" onclick="checkOffItem('{{ item.id }}', this)" style="background-color: rgb(79, 204, 79);" {% if item.checked_off %}disabled{% endif %}>Check this off</button>
                     {% endif %}
                 </div>
             </div>
@@ -50,10 +50,6 @@
             var itemId = document.querySelector("[data-item-id]").getAttribute("data-item-id");
             var itemUrl = document.querySelector("#itemUrl").getAttribute("data-item-url");
             window.location.href = itemUrl;
-        }
-
-        function checkoff() {
-
         }
     </script>
 </div>

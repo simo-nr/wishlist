@@ -22,3 +22,28 @@ function closeMenu() {
     menu.style.left = "-250px";
     content.style.marginLeft = "0";
 }
+
+function checkOffItem(itemId, button) {
+    fetch(`/checkoff/${itemId}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        // include additional info later
+        body: JSON.stringify({}),
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        button.disabled = true;
+        return response.json();
+    })
+    .then(data => {
+        // Handle the response from the server if needed
+        console.log(data);
+    })
+    .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+    });
+}
