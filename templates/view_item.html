@@ -3,24 +3,39 @@
 {% block body %}
 <div class="content">
 
-    <button class="bigButton" onclick="editItem()" data-item-id="{{ item.id }}" style="background-color: rgb(79, 204, 79);">Edit this item</button>
-    
     <div class="content">
         <h1 style="text-align: center">View of item</h1>
-        
         <h4 style="text-align: center">something about the item</h4>
+
+        <div class="container">
+            <div class="image-container">
+                <img src="{{ item.image_link}}" alt="Image of this item">
+            </div>
+
+            <div class="info-container">
+                <h2>{{ item.name }}</h2>
+                <p>item url: {{ item.url }}</p>
+                <p>Description: {{ item.notes }}</p>
+                <p>Added: {{ item.date_created }}</p>
+
+                <div class="container">
+                    {% if item.user_id == userId %}
+                    <button class="bigButton" onclick="editItem()" data-item-id="{{ item.id }}" style="background-color: rgb(79, 204, 79);">Edit this item</button>
+                    {% else %}
+                    <button class="bigButton" onclick="goToSite()" data-item-id="6" style="background-color: rgb(56,131,193);">Go to link</button>
+                    <button class="bigButton" onclick="checkoff()" data-item-id="6" style="background-color: rgb(79, 204, 79);">Check this off</button>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
         
-        <p>item name: {{ item.name }}</p>
-        <p>item url: {{ item.url }}</p>
         <p>item image link: {{ item.image_link }}</p>
-        <p>item notes: {{ item.notes }}</p>
         <p>item id: {{ item.id }}</p>
-        <p>item date: {{ item.date_created }}</p>
         <p>item checked: {{ item.checked_off }}</p>
         <p>item owner id: {{ item.user_id }}</p>
 
-        <img src="{{ item.image_link}}">
-        <img src="https://images-eu.ssl-images-amazon.com/images/I/81+ebc5fVZL._AC_UL348_SR348,348_.jpg">
+        <p>{{ userId }}</p>
+        
     </div>
     
     
@@ -30,7 +45,17 @@
             var targetPageUrl = '/edit_item/' + itemId;
             window.location.href = targetPageUrl;
         }
-        </script>
+
+        function goToSite() {
+            var itemId = document.querySelector("[data-item-id]").getAttribute("data-item-id");
+            var itemUrl = document.querySelector("#itemUrl").getAttribute("data-item-url");
+            window.location.href = itemUrl;
+        }
+
+        function checkoff() {
+
+        }
+    </script>
 </div>
 
 

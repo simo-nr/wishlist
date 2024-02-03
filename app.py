@@ -95,7 +95,7 @@ def view_user(id):
 @login_required
 def view_item(id):
     viewing_item = WishlistItem.query.get_or_404(id)
-    return render_template('view_item.html', item=viewing_item)
+    return render_template('view_item.html', item=viewing_item, userId=current_user.id)
 
 
 @app.route('/edit_item/<int:id>', methods=['POST', 'GET'])
