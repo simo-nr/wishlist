@@ -10,9 +10,20 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(20), unique=True, nullable=False)
     password = db.Column(db.String(60), nullable=False)
     wishlist_items = db.relationship('WishlistItem', backref='user', lazy=True)
+    friends = db.relationship('User', 
+                              secondary='friendship',
+                              primaryjoin='User.id == friendship.c.user_id',
+                              secondaryjoin='User.id == friendship.c.friend_id',
+                              backref='friend_of')
 
     def __repr__(self):
         return f'<User ({self.id}, {self.username}, {self.password})>'
+    
+
+friendship = db.Table('friendship',
+    db.Column('user_id', db.Integer, db.ForeignKey('user.id'), primary_key=True),
+    db.Column('friend_id', db.Integer, db.ForeignKey('user.id'), primary_key=True)
+)
 
 class WishlistItem(db.Model):
     id = db.Column(db.Integer, primary_key=True)

@@ -91,6 +91,22 @@ def view_user(id):
     return render_template('view_user.html', items=items)
 
 
+@app.route('/friends', methods=['POST', 'GET'])
+@login_required
+def friends():
+    if request.method == 'POST':
+        # TODO: change all of this, popup to add one friend
+
+        # set everyone as friend for now
+        all_users = User.query.all()
+        for user in all_users:
+            if user != current_user:
+                current_user.friends.append(user)
+
+    friend_users = current_user.friends
+    return render_template('friends.html', friends=friend_users)
+
+
 @app.route('/view_item/<int:id>', methods=['POST', 'GET'])
 @login_required
 def view_item(id):
