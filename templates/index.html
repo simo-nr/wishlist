@@ -5,6 +5,7 @@
     <h1 style="text-align: center;">{{ user }}'s wishlist</h1>
     {% if items|length < 1 %}
     <h4 style="text-align: center">There are no items. Create one below!</h4>
+    <button class="bigButton" onclick="newItemPage()" style="background-color: rgb(79, 204, 79);">Add your first item</button>
     {% else %}
 
     <button class="bigButton" onclick="newItemPage()" style="background-color: rgb(79, 204, 79);">Add an item</button>
