@@ -35,6 +35,7 @@ class WishlistItem(db.Model):
     checked_off = db.Column(db.Boolean, default=False) 
     notes = db.Column(db.String(400))
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
+    price = db.Column(db.Numeric(precision=10, scale=2))
 
     def to_dict(self):
         return {

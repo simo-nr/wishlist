@@ -135,3 +135,71 @@ p {
     box-sizing: border-box;
     background-color: #4CAF50;
 }
+
+/* tiling structure */
+.tile {
+    position: relative;
+
+    background-color: #fff; /* Set background color */
+    border: 1px solid #ddd; /* Add border for visual separation */
+    border-radius: 10px; /* Add border radius for rounded corners */
+    margin: 1%;
+    overflow: hidden; /* Hide overflowing content */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+    width: 200px;
+    height: 200px;
+    transition: all 0.3s ease;
+}
+
+.tile:hover {
+    transform: scale(1.1); /* Grow the tile on hover */
+}
+
+.tile:hover img{
+    transform: scale(1.1); /* Grow the img on hover */
+}
+
+.tile img {
+    width: 100%; /* Make image fill tile width */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Prevent extra space below image */
+    transition: all 0.3s ease;
+}
+
+.tile .content {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+
+    background-color: aquamarine;
+    padding: 10px; /* Add padding to content */
+    transition: font-size 0.3s ease; /* Add transition for smooth font-size change */
+    line-height: 1.5; /* Set line-height for smoother vertical transition */
+    display: flex;
+    align-items: flex-end;
+}
+
+.tile h2 {
+    margin: 0; /* Remove margin */
+    font-size: 16px; /* Set font size */
+    color: #333; /* Set font color */
+    transition: font-size 0.1s ease;
+}
+
+.tile .price {
+    font-weight: bold; /* Set font weight */
+    color: #007bff; /* Set price color */
+    /* transition: font-size 0.1s ease; */
+}
+
+/* grid container stuff */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+  }
+
+  .tile {
+    background-color: #ccc;
+    aspect-ratio: 1;
+  }
