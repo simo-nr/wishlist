@@ -3808,3 +3808,4 @@ env/lib/python3.11/site-packages/pillow-10.2.0.dist-info/REQUESTED
 env/lib/python3.11/site-packages/pillow-10.2.0.dist-info/top_level.txt
 env/lib/python3.11/site-packages/pillow-10.2.0.dist-info/WHEEL
 env/lib/python3.11/site-packages/pillow-10.2.0.dist-info/zip-safe
+__pycache__/image_collector.cpython-311.pyc

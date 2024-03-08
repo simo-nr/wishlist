@@ -10,6 +10,29 @@
 
     <button class="bigButton" onclick="newItemPage()" style="background-color: rgb(79, 204, 79);">Add an item</button>
 
+    
+    <div class="grid-container">
+        {% for item in items %}
+        <a href="/view_item/{{item.id}}">
+
+            <div class="tile">
+                {% if item.image_link is none or item.image_link == "" or item.image_link == "None" or item.image_link == "Nonei" %}
+                <img src="{{ url_for('static', filename='placeholder.jpg') }}" alt="Product Image">
+                {% else %}
+                <img src="{{ item.image_link }}" alt="Product Image">
+                {% endif %}
+                
+                <div class="content">
+                    <h2>{{ item.url }}</h2> <!-- Title -->
+                    <div class="price">{{ item.date_created.date() }}</div> <!-- Price -->
+                </div>
+                
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+
+
     <div class="itemHolder">
         <table>
             <tr>
@@ -31,24 +54,6 @@
                 </tr>
             {% endfor %}
         </table>
-    </div>
-
-    <div class="grid-container">
-        {% for item in items %}
-        <div class="tile">
-            {% if item.image_link is none or item.image_link == "" or item.image_link == "None" or item.image_link == "Nonei" %}
-            <img src="{{ url_for('static', filename='placeholder.jpg') }}" alt="Product Image">
-            {% else %}
-            <img src="{{ item.image_link }}" alt="Product Image">
-            {% endif %}
-            
-            <div class="content">
-                <h2>{{ item.url }}</h2> <!-- Title -->
-                <div class="price">{{ item.date_created.date() }}</div> <!-- Price -->
-            </div>
-            
-        </div>
-        {% endfor %}
     </div>
 
     {% endif %}

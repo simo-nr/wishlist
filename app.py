@@ -9,6 +9,7 @@ import uuid
 
 from config import Config
 from models import db, User, WishlistItem
+from image_collector import get_images
 
 
 app = Flask(__name__)
@@ -150,7 +151,7 @@ def new_url():
         
         # add web scraper here
         # to demonstrate webscraper, add notes
-        notes = f'some things in the note to act like webscraper stuff {datetime.utcnow}'
+        notes = f'some things in the note to act like webscraper stuff {datetime.utcnow()}'
         # for now just redirect to edit page with only the url in the item
 
         temp_new_item = WishlistItem(user_id=current_user.id, url=item_url, notes=notes)
@@ -178,6 +179,10 @@ def add_item(id):
     if new_item is None:
         print("item not found in the database")
         return "No item found in the database"
+    
+    imagelinks = get_images(new_item.url)
+    if len(imagelinks) > 10:
+        imagelinks = imagelinks[0: 10]
 
     if request.method == 'POST':
         new_item.name = request.form['name']
@@ -194,7 +199,7 @@ def add_item(id):
             db.session.rollback()  # Rollback changes if an error occurs during commit
             return "There was an error updating the item"
 
-    return render_template('add_item.html', item=new_item)
+    return render_template('add_item.html', item=new_item, images=imagelinks)
 
 
 

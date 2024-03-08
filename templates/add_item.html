@@ -14,6 +14,14 @@
         <label for="image_link">Image Link:</label><br>
         <!-- add button to regenerate the available images -->
         <!-- add list of images -->
+        <div class="grid-container">
+            {% for imageUrl in images %}
+            <div class="tile">
+                <img src="{{ imageUrl }}" alt="Product Image">
+            </div>
+            {% endfor %}
+        </div>
+
         <input type="text" id="image_link" name="image_link" value="{{ item.image_link }}"><br>
         
         <label for="url">URL:</label><br>

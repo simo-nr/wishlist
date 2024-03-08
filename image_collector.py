@@ -38,8 +38,9 @@ def get_all_images_above_dimensions(url, min_width, min_height):
         return []
 
 # Example usage
-website_url = 'https://www.bol.com/be/nl/p/lego-star-wars-venator-class-republic-attack-cruiser-75367/9300000161235312/?bltgh=ixguWwuO9MsJLy7gyM5AtQ.2_18.23.ProductTitle'
+# website_url = 'https://www.bol.com/be/nl/p/lego-star-wars-venator-class-republic-attack-cruiser-75367/9300000161235312/?bltgh=ixguWwuO9MsJLy7gyM5AtQ.2_18.23.ProductTitle'
 # website_url = 'https://www.amazon.com.be/-/en/75387/dp/B0CFW28JMN/ref=sr_1_17?crid=2JBGQMSLH28FY&keywords=lego+star+wars&qid=1706977355&sprefix=lego+star+wars%2Caps%2C94&sr=8-17'
+website_url = 'https://www.bol.com/be/nl/p/lego-star-wars-millennium-falcon-75375/9300000157956368/?bltgh=u2ApZSQ0eyUc3Wj8pfxObw.2_18.22.ProductTitle'
 
 min_width = 100
 min_height = 100
@@ -47,9 +48,9 @@ min_height = 100
 def get_images(website_url):
     filtered_image_urls = get_all_images_above_dimensions(website_url, min_width, min_height)
 
-    print(f"Image URLs above {min_width}x{min_height} pixels, sorted by resolution:")
-    for url in filtered_image_urls:
-        print(url)
+    # print(f"Image URLs above {min_width}x{min_height} pixels, sorted by resolution:")
+    # for url in filtered_image_urls:
+    #     print(url)
 
     return filtered_image_urls
 
