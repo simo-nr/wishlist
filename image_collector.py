@@ -51,7 +51,8 @@ def get_all_images_above_dimensions(url, min_width, min_height):
 # website_url = 'https://www.bol.com/be/nl/p/lego-star-wars-venator-class-republic-attack-cruiser-75367/9300000161235312/?bltgh=ixguWwuO9MsJLy7gyM5AtQ.2_18.23.ProductTitle'
 # website_url = 'https://www.amazon.com.be/-/en/75387/dp/B0CFW28JMN/ref=sr_1_17?crid=2JBGQMSLH28FY&keywords=lego+star+wars&qid=1706977355&sprefix=lego+star+wars%2Caps%2C94&sr=8-17'
 # website_url = 'https://www.bol.com/be/nl/p/lego-star-wars-millennium-falcon-75375/9300000157956368/?bltgh=u2ApZSQ0eyUc3Wj8pfxObw.2_18.22.ProductTitle'
-website_url = 'https://www.amazon.com.be/-/en/Feandrea-Stuffing-Machine-Washable-PGW204G01/dp/B09TSZJW1B/?_encoding=UTF8&pd_rd_w=7u7nj&content-id=amzn1.sym.78427eee-a311-4484-b77d-804ebca95bf1&pf_rd_p=78427eee-a311-4484-b77d-804ebca95bf1&pf_rd_r=FET1T0TFS1KTKZF850Q8&pd_rd_wg=G7Kef&pd_rd_r=2495e6aa-ffc4-480f-bd05-f0f94059ab87&ref_=pd_gw_crs_zg_bs_27157903031&th=1'
+# website_url = 'https://www.amazon.com.be/-/en/Feandrea-Stuffing-Machine-Washable-PGW204G01/dp/B09TSZJW1B/?_encoding=UTF8&pd_rd_w=7u7nj&content-id=amzn1.sym.78427eee-a311-4484-b77d-804ebca95bf1&pf_rd_p=78427eee-a311-4484-b77d-804ebca95bf1&pf_rd_r=FET1T0TFS1KTKZF850Q8&pd_rd_wg=G7Kef&pd_rd_r=2495e6aa-ffc4-480f-bd05-f0f94059ab87&ref_=pd_gw_crs_zg_bs_27157903031&th=1'
+website_url = 'http://olympus.realpython.org/profiles/aphrodite'
 
 min_width = 100
 min_height = 100

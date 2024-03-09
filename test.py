@@ -1,7 +1,26 @@
-# list = [0, 1, 2, 3, 4, 5]
-# print(list[2])
-# print(list[1:3])
+import requests
+from bs4 import BeautifulSoup
+from urllib.parse import urljoin
+from PIL import Image
+from io import BytesIO
+
+website_url = 'http://olympus.realpython.org/profiles/aphrodite'
+
+headers = {
+    'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.1 Safari/605.1.15'
+}
 
 
-myString = "https://www.amazon.com.be/-/en/Millennium-Construction-Spaceship-Collectible-75375/dp/B0CFW29DZX/ref=sr_1_6?crid=IMYHJV768W9P&dib=eyJ2IjoiMSJ9.0FPv2O-fQtLqrDQKVFCOmKkf4zS1eosSYnqLQXpwxOmCXcGieBsPRK7bvq6w597aXBxIKECXv-RCKVl_etY-tbmD5aqOLgbaiPxPx5q7toXcoicO01N8r01b9ziwSV4-QATHPiH7iie_U2jlxxEVppML5iN0yA5KTxlhoMQ_QUIl9vJQy1CsSp6ecbXLj_OKdwu_2-HQSwsU-sybBaqa-GipcvutT2RCPrP8nNhG4oZB92UcCeV3uH_MwfCXcLmjyh3DAe0L5hbMWZb2gkP-8pm-7FhmM8Nx7oleAuFiMD4.0bi1Sb2RM9noR1OdAZabQkk3zkcTQD3BRR_K6xj3Cf8&dib_tag=se&keywords=lego+star+wars&qid=1709989914&sprefix=lego+star+war%2Caps%2C132&sr=8-6"
-print(len(myString))
+response = requests.get(website_url, headers=headers)
+
+soup = BeautifulSoup(response.text, 'html.parser')
+images = soup.find_all('img')
+
+image_data = []
+for img in images:
+    src = img.get('src')
+    if src:
+        full_url = urljoin(website_url, src)
+        image_data.append({'url': full_url})
+
+print(image_data)

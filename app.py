@@ -166,6 +166,7 @@ def new_url():
             print(e)
             return "there was a problem adding the item"
 
+        print(f"right before the redirect {temp_new_item.id}")
         return redirect(url_for('add_item', id=temp_new_item.id))
     
     return render_template('new_url.html')
@@ -207,15 +208,16 @@ def add_item(id):
                 print(e)
             return redirect('/')
     
-    print("before image collector")
-    imagelinks = get_images(new_item.url)
-    print("after image collector")
-    if len(imagelinks) > 0:
-        print("received image links")
-    else:
-        print("no links received")
-    if len(imagelinks) > 10:
-        imagelinks = imagelinks[0: 10]
+    # print("before image collector")
+    # imagelinks = get_images(new_item.url)
+    # print("after image collector")
+    # if len(imagelinks) > 0:
+    #     print("received image links")
+    # else:
+    #     print("no links received")
+    # if len(imagelinks) > 10:
+    #     imagelinks = imagelinks[0: 10]
+    imagelinks = ['http://olympus.realpython.org/static/aphrodite.gif']
 
     return render_template('add_item.html', item=new_item, images=imagelinks)
 
