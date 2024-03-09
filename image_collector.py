@@ -4,6 +4,11 @@ from urllib.parse import urljoin
 from PIL import Image
 from io import BytesIO
 
+
+def dummy_function(url):
+    print(url)
+    return ['http://olympus.realpython.org/static/aphrodite.gif']
+
 def get_image_dimensions(url):
     try:
         response = requests.get(url, headers=headers)

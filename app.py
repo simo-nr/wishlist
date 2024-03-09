@@ -9,7 +9,7 @@ import uuid
 
 from config import Config
 from models import db, User, WishlistItem
-from image_collector import get_images
+from image_collector import get_images, dummy_function
 
 
 app = Flask(__name__)
@@ -217,7 +217,7 @@ def add_item(id):
     #     print("no links received")
     # if len(imagelinks) > 10:
     #     imagelinks = imagelinks[0: 10]
-    imagelinks = ['http://olympus.realpython.org/static/aphrodite.gif']
+    imagelinks = dummy_function(new_item.url)
 
     return render_template('add_item.html', item=new_item, images=imagelinks)
 
