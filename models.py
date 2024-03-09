@@ -31,7 +31,7 @@ class WishlistItem(db.Model):
 
     name = db.Column(db.String(200), nullable=False)
     image_link = db.Column(db.String(200))
-    url = db.Column(db.String(200), nullable=False)
+    url = db.Column(db.String(600), nullable=False)
     checked_off = db.Column(db.Boolean, default=False) 
     notes = db.Column(db.String(400))
     date_created = db.Column(db.DateTime, default=datetime.utcnow)

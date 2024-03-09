@@ -16,9 +16,9 @@
         <!-- add list of images -->
         <div class="grid-container">
             {% for imageUrl in images %}
-            <div class="tile">
-                <img src="{{ imageUrl }}" alt="Product Image">
-            </div>
+                <div class="tile" onclick="addUrlToTextField('{{ imageUrl }}')">
+                    <img src="{{ imageUrl }}" alt="Product Image">
+                </div>
             {% endfor %}
         </div>
 
@@ -39,8 +39,10 @@
 </div>
 
 <script>
-
-
+    function addUrlToTextField(imageUrl) {
+        var imageUrlField = document.getElementById("image_link");
+        imageUrlField.value = imageUrl;
+    }
 </script>
 
 {% endblock %}

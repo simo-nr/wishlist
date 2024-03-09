@@ -160,9 +160,10 @@ def new_url():
             db.session.add(temp_new_item)
             db.session.commit()
             print("item added succesfully")
-        except:
+        except Exception as e:
             db.session.rollback()
             print("item not added")
+            print(e)
             return "there was a problem adding the item"
 
         return redirect(url_for('add_item', id=temp_new_item.id))

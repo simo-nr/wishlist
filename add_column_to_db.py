@@ -23,7 +23,8 @@ for table in tables:
 # Example: Add a new column 'new_column' to the 'WishlistItem' table
 # my_cursor.execute("ALTER TABLE wishlist_item ADD COLUMN image_link VARCHAR(200)")
 # my_cursor.execute("ALTER TABLE wishlist_item ADD COLUMN notes VARCHAR(400)")
-my_cursor.execute("ALTER TABLE wishlist_item ADD COLUMN price DECIMAL(10, 2)")
+# my_cursor.execute("ALTER TABLE wishlist_item ADD COLUMN price DECIMAL(10, 2)")
+my_cursor.execute("ALTER TABLE wishlist_item MODIFY COLUMN url VARCHAR(600)")
     
 # my_cursor.execute("ALTER TABLE user ADD COLUMN ")
 
