@@ -217,7 +217,8 @@ def add_item(id):
     #     print("no links received")
     # if len(imagelinks) > 10:
     #     imagelinks = imagelinks[0: 10]
-    imagelinks = dummy_function(new_item.url)
+    # imagelinks = dummy_function(new_item.url)
+    imagelinks = [url_for('static', filename='placeholder.jpg')]
 
     return render_template('add_item.html', item=new_item, images=imagelinks)
 
