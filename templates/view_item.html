@@ -19,11 +19,11 @@
                 <p>Added: {{ item.date_created }}</p>
 
                 <div class="container">
-                    {% if item.user_id != userId %}
-                    <button class="bigButton" onclick="editItem()" data-item-id="{{ item.id }}" style="background-color: rgb(79, 204, 79);">Edit this item</button>
+                    {% if item.user_id == userId %}
+                        <button class="bigButton" onclick="editItem()" data-item-id="{{ item.id }}" style="background-color: rgb(79, 204, 79);">Edit this item</button>
                     {% else %}
-                    <button class="bigButton" onclick="goToSite()" data-item-id="6" style="background-color: rgb(56,131,193);">Go to link</button>
-                    <button class="bigButton" onclick="checkOffItem('{{ item.id }}', this)" style="background-color: rgb(79, 204, 79);" {% if item.checked_off %}disabled{% endif %}>Check this off</button>
+                        <button class="bigButton" onclick="goToSite()" data-item-id="6" style="background-color: rgb(56,131,193);">Go to link</button>
+                        <button class="bigButton" onclick="checkOffItem('{{ item.id }}', this)" style="background-color: rgb(79, 204, 79);" {% if item.checked_off %}disabled{% endif %}>Check this off</button>
                     {% endif %}
                 </div>
             </div>
@@ -34,7 +34,7 @@
         <p>item checked: {{ item.checked_off }}</p>
         <p>item owner id: {{ item.user_id }}</p>
 
-        <p>{{ userId }}</p>
+        <p>userid: {{ userId }}</p>
         
     </div>
     

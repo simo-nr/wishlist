@@ -5,17 +5,27 @@ from PIL import Image
 from io import BytesIO
 
 def get_image_dimensions(url):
-    response = requests.get(url)
+    try:
+        response = requests.get(url, headers=headers)
+    except:
+        return None, None
+    
     if response.status_code == 200:
-        img = Image.open(BytesIO(response.content))
-        width, height = img.size
+        try:
+            img = Image.open(BytesIO(response.content))
+            width, height = img.size
+        except:
+            return None, None
         return width, height
     else:
         return None, None
 
 def get_all_images_above_dimensions(url, min_width, min_height):
-    response = requests.get(url)
-    
+    try:
+        response = requests.get(url, headers=headers)
+    except:
+        return []
+
     if response.status_code == 200:
         soup = BeautifulSoup(response.text, 'html.parser')
         images = soup.find_all('img')
@@ -40,20 +50,24 @@ def get_all_images_above_dimensions(url, min_width, min_height):
 # Example usage
 # website_url = 'https://www.bol.com/be/nl/p/lego-star-wars-venator-class-republic-attack-cruiser-75367/9300000161235312/?bltgh=ixguWwuO9MsJLy7gyM5AtQ.2_18.23.ProductTitle'
 # website_url = 'https://www.amazon.com.be/-/en/75387/dp/B0CFW28JMN/ref=sr_1_17?crid=2JBGQMSLH28FY&keywords=lego+star+wars&qid=1706977355&sprefix=lego+star+wars%2Caps%2C94&sr=8-17'
-website_url = 'https://www.bol.com/be/nl/p/lego-star-wars-millennium-falcon-75375/9300000157956368/?bltgh=u2ApZSQ0eyUc3Wj8pfxObw.2_18.22.ProductTitle'
+# website_url = 'https://www.bol.com/be/nl/p/lego-star-wars-millennium-falcon-75375/9300000157956368/?bltgh=u2ApZSQ0eyUc3Wj8pfxObw.2_18.22.ProductTitle'
+website_url = 'https://www.amazon.com.be/-/en/Feandrea-Stuffing-Machine-Washable-PGW204G01/dp/B09TSZJW1B/?_encoding=UTF8&pd_rd_w=7u7nj&content-id=amzn1.sym.78427eee-a311-4484-b77d-804ebca95bf1&pf_rd_p=78427eee-a311-4484-b77d-804ebca95bf1&pf_rd_r=FET1T0TFS1KTKZF850Q8&pd_rd_wg=G7Kef&pd_rd_r=2495e6aa-ffc4-480f-bd05-f0f94059ab87&ref_=pd_gw_crs_zg_bs_27157903031&th=1'
 
 min_width = 100
 min_height = 100
 
+headers = {
+    'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.1 Safari/605.1.15'
+}
+
 def get_images(website_url):
     filtered_image_urls = get_all_images_above_dimensions(website_url, min_width, min_height)
-
-    # print(f"Image URLs above {min_width}x{min_height} pixels, sorted by resolution:")
-    # for url in filtered_image_urls:
-    #     print(url)
-
     return filtered_image_urls
 
 
 if __name__ == '__main__':
-    get_images(website_url)
+    filtered_image_urls = get_images(website_url)
+
+    print(f"Image URLs above {min_width}x{min_height} pixels, sorted by resolution:")
+    for url in filtered_image_urls:
+        print(url)

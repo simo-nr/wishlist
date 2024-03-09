@@ -192,7 +192,8 @@ def add_item(id):
                 db.session.add(new_item)
                 db.session.commit()
                 print("Item is added")
-                return render_template('view_item.html', item=new_item)
+                # return render_template('view_item.html', item=new_item)
+                return redirect(url_for('view_item', id=new_item.id))
             except:
                 db.session.rollback()  # Rollback changes if an error occurs during commit
                 return "There was an error updating the item"
