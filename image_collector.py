@@ -9,9 +9,11 @@ def dummy_function(url):
     print(f"url: {url}")
     url = 'http://olympus.realpython.org/profiles/aphrodite'
     response = requests.get(url, headers=headers)
+    print(f"response: {response}")
 
     soup = BeautifulSoup(response.text, 'html.parser')
     images = soup.find_all('img')
+    print(f"images: {images}")
 
     image_data = []
     for img in images:
@@ -19,6 +21,7 @@ def dummy_function(url):
         if src:
             full_url = urljoin(url, src)
             image_data.append(full_url)
+    print(f"image_data: {image_data}")
     return image_data
 
 
@@ -85,9 +88,9 @@ def get_images(website_url):
 
 
 if __name__ == '__main__':
-    filtered_image_urls = get_images(website_url)
+    # filtered_image_urls = get_images(website_url)
 
-    print(f"Image URLs above {min_width}x{min_height} pixels, sorted by resolution:")
-    for url in filtered_image_urls:
-        print(url)
-    # print(dummy_function('bol.com'))
+    # print(f"Image URLs above {min_width}x{min_height} pixels, sorted by resolution:")
+    # for url in filtered_image_urls:
+    #     print(url)
+    print(dummy_function('bol.com'))
