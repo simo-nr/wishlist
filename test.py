@@ -21,6 +21,6 @@ for img in images:
     src = img.get('src')
     if src:
         full_url = urljoin(website_url, src)
-        image_data.append({'url': full_url})
+        image_data.append(full_url)
 
 print(image_data)

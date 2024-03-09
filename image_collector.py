@@ -6,8 +6,21 @@ from io import BytesIO
 
 
 def dummy_function(url):
-    print(url)
-    return ['http://olympus.realpython.org/static/aphrodite.gif']
+    print(f"url: {url}")
+    url = 'http://olympus.realpython.org/profiles/aphrodite'
+    response = requests.get(url, headers=headers)
+
+    soup = BeautifulSoup(response.text, 'html.parser')
+    images = soup.find_all('img')
+
+    image_data = []
+    for img in images:
+        src = img.get('src')
+        if src:
+            full_url = urljoin(url, src)
+            image_data.append(full_url)
+    return image_data
+
 
 def get_image_dimensions(url):
     try:
@@ -77,3 +90,4 @@ if __name__ == '__main__':
     print(f"Image URLs above {min_width}x{min_height} pixels, sorted by resolution:")
     for url in filtered_image_urls:
         print(url)
+    # print(dummy_function('bol.com'))
