@@ -175,6 +175,7 @@ def new_url():
 @app.route('/add_item/<int:id>', methods=['POST', 'GET'])
 @login_required
 def add_item(id):
+    print(f"add_item is called with request method {request.method}")
     new_item = WishlistItem.query.get(id) # TODO: deprecated, change this line
 
     if new_item is None:
