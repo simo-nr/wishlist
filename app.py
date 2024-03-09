@@ -205,8 +205,14 @@ def add_item(id):
             except Exception as e:
                 print(e)
             return redirect('/')
-        
+    
+    print("before image collector")
     imagelinks = get_images(new_item.url)
+    print("after image collector")
+    if len(imagelinks) > 0:
+        print("received image links")
+    else:
+        print("no links received")
     if len(imagelinks) > 10:
         imagelinks = imagelinks[0: 10]
 
