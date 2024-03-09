@@ -16,7 +16,7 @@
         <!-- add list of images -->
         <div class="grid-container">
             {% for imageUrl in images %}
-                <div class="tile" onclick="addUrlToTextField('{{ imageUrl }}')">
+                <div class="tile image-tile" onclick="addUrlToTextField('{{ imageUrl }}'); selectImage(this);">
                     <img src="{{ imageUrl }}" alt="Product Image">
                 </div>
             {% endfor %}
@@ -33,7 +33,10 @@
         <label for="notes">Notes:</label><br>
         <textarea id="notes" name="notes">{{ item.notes }}</textarea><br>
         
-        <input type="submit" value="Submit">
+        <input type="submit" name="submit" value="Submit">
+    </form>
+    <form action="/add_item/{{ item.id }}" method="POST">
+        <input type="submit" name="cancel" value="Cancel">
     </form>
 
 </div>
@@ -43,6 +46,28 @@
         var imageUrlField = document.getElementById("image_link");
         imageUrlField.value = imageUrl;
     }
+
+    function selectImage(clickedImage) {
+        console.log("in fucntion to change grayscale");
+        // Reset styles of all images
+
+        var tiles = document.querySelectorAll('.tile.image-tile');
+        tiles.forEach(function(tile) {
+            var image = tile.querySelector('img');
+            image.style.filter = 'none'; // Reset filter
+            tile.style.border = 'none'; // Reset border
+        });
+
+        var images = document.querySelectorAll('.tile.image-tile img');
+        images.forEach(function(image) {
+            if(image !== clickedImage.querySelector('img')) {
+                image.style.filter = 'grayscale(100%)';
+            }
+        });
+
+        clickedImage.style.border = '4px solid lightgreen'; // Add border to clicked image
+    }
+
 </script>
 
 {% endblock %}

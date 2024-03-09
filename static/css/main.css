@@ -149,6 +149,9 @@ p {
     width: 200px;
     height: 200px;
     transition: all 0.3s ease;
+
+    justify-content: center;
+    align-items: center;
 }
 
 .tile:hover {
@@ -199,7 +202,15 @@ p {
     gap: 20px;
   }
 
-  .tile {
-    background-color: #ccc;
+.tile {
+background-color: #ccc;
+aspect-ratio: 1;
+}
+
+.image-tile {
+    height: 150px;
+    width: 150px;
     aspect-ratio: 1;
-  }
+    margin: 0;
+    cursor: pointer;
+}

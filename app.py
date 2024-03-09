@@ -175,30 +175,39 @@ def new_url():
 @app.route('/add_item/<int:id>', methods=['POST', 'GET'])
 @login_required
 def add_item(id):
-    new_item = WishlistItem.query.get(id)
+    new_item = WishlistItem.query.get(id) # TODO: deprecated, change this line
 
     if new_item is None:
         print("item not found in the database")
         return "No item found in the database"
-    
+
+    if request.method == 'POST':
+        if 'submit' in request.form:
+            new_item.name = request.form['name']
+            new_item.image_link = request.form['image_link']
+            new_item.url = request.form['url']
+            new_item.notes = request.form['notes']
+
+            try:
+                db.session.add(new_item)
+                db.session.commit()
+                print("Item is added")
+                return render_template('view_item.html', item=new_item)
+            except:
+                db.session.rollback()  # Rollback changes if an error occurs during commit
+                return "There was an error updating the item"
+        elif 'cancel' in request.form:
+            # user canceled adding the item, new_item should be removed from the db
+            try:
+                db.session.delete(new_item)
+                db.session.commit()
+            except Exception as e:
+                print(e)
+            return redirect('/')
+        
     imagelinks = get_images(new_item.url)
     if len(imagelinks) > 10:
         imagelinks = imagelinks[0: 10]
-
-    if request.method == 'POST':
-        new_item.name = request.form['name']
-        new_item.image_link = request.form['image_link']
-        new_item.url = request.form['url']
-        new_item.notes = request.form['notes']
-
-        try:
-            db.session.add(new_item)
-            db.session.commit()
-            print("Item is added")
-            return render_template('view_item.html', item=new_item)
-        except:
-            db.session.rollback()  # Rollback changes if an error occurs during commit
-            return "There was an error updating the item"
 
     return render_template('add_item.html', item=new_item, images=imagelinks)
 
